@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LoginViewModel>();
+    final id = null;
 
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
@@ -25,6 +26,7 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.read<LoginViewModel>().login(
+                  id,
                   nameController.text,
                   emailController.text,
                   passwordController.text,

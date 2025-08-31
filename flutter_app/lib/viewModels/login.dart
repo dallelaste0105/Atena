@@ -7,13 +7,13 @@ class LoginViewModel extends ChangeNotifier {
   User? user;
   String? error;
 
-  Future<void> login(String name, String email, String password) async {
-    final url = Uri.parse('http://192.168.0.10:3000/login');
+  Future<void> login(int id, String name, String email, String password) async {
+    final url = Uri.parse('http://192.168.1.2:3000/user');
 
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'name':name, 'email': email, 'password': password}),
+      body: jsonEncode({'id':id,'name':name, 'email': email, 'password': password}),
     );
 
     if (response.statusCode == 200) {

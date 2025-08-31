@@ -1,7 +1,7 @@
 const UserModel = require('../models/userModel');
 
 function cadastrarUsuario(req, res) {
-  const { name, email, password } = req.body;
+  const {id, name, email, password } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
