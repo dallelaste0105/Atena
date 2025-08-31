@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import '../models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../models/user.dart';
 
 class LoginViewModel extends ChangeNotifier {
   User? user;
   String? error;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(String name, String email, String password) async {
+    final url = Uri.parse('http://192.168.0.10:3000/login');
+
     final response = await http.post(
-      Uri.parse('https://suaapi.com/login'),
-      body: {'email': email, 'password': password},
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'name':name, 'email': email, 'password': password}),
     );
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      user = User(id: data['id'], name: data['name'], email: data['email']);
+      final data = jsonDecode(response.body);
       error = null;
     } else {
-      error = 'Login falhou';
+      error = 'Login failed';
       user = null;
     }
 
