@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/user.dart';
 
-class LoginViewModel extends ChangeNotifier {
+class UsuarioViewModel extends ChangeNotifier {
   User? user;
   String? error;
 
@@ -26,4 +26,26 @@ class LoginViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> signUp(int id, String name, String email, String password) async {
+    final url = Uri.parse('http://localhost:3000/pegarUsuario?name=$name&email=$email&password=$password');
+
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    String retorno = response.body;
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      error = null;
+    } else {
+      error = 'Login failed';
+      user = null;
+    }
+
+    notifyListeners();
+  }
+
 }

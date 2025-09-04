@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/viewModels/login.dart';
+import 'package:flutter_app/viewModels/UsuarioViewModel.dart';
 import 'package:flutter_app/views/homeScreen.dart';
+import 'package:flutter_app/views/signupScreen.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<LoginViewModel>();
+    final viewModel = context.watch<UsuarioViewModel>();
     final id = 0;
 
     return Scaffold(
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: () {
                 // primeiro chama o login
-                context.read<LoginViewModel>().login(
+                context.read<UsuarioViewModel>().login(
                   id,
                   nameController.text,
                   emailController.text,
@@ -58,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Signupscreen()));
+        
+      }),
     );
   }
 }

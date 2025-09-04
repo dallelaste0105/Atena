@@ -16,4 +16,17 @@ function cadastrarUsuario(req, res) {
   });
 }
 
-module.exports = { cadastrarUsuario };
+function pegarUsuario(req, res){
+  const { name, email, password } = req.query;
+
+
+  UserModel.doLogin(name, email, password, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao salvar no banco' });
+    }
+
+    res.status(201).json({ message: 'Usuário voltado com sucesso' });
+  })
+  }
+
+module.exports = { cadastrarUsuario, pegarUsuario};
