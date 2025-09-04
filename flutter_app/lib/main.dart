@@ -7,7 +7,9 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (_) => LoginViewModel(),
-      child: MaterialApp(home: LoginScreen()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginScreen()),
     ),
   );
 }

@@ -8,7 +8,7 @@ class LoginViewModel extends ChangeNotifier {
   String? error;
 
   Future<void> login(int id, String name, String email, String password) async {
-    final url = Uri.parse('http://192.168.1.2:3000/user');
+    final url = Uri.parse('http://localhost:3000/cadastroUsuario');
 
     final response = await http.post(
       url,

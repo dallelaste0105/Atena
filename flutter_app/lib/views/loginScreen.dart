@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/viewModels/login.dart';
+import 'package:flutter_app/views/homeScreen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_app/viewModels/login.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
@@ -11,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LoginViewModel>();
-    final id = null;
+    final id = 0;
 
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
@@ -19,25 +24,37 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(controller: nameController, decoration: InputDecoration(labelText: 'Nome')),
-            TextField(controller: emailController, decoration: InputDecoration(labelText: 'E-mail')),
-            TextField(controller: passwordController, decoration: InputDecoration(labelText: 'Senha'), obscureText: true),
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: 'Nome'),
+            ),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(labelText: 'E-mail'),
+            ),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(labelText: 'Senha'),
+              obscureText: true,
+            ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                // primeiro chama o login
                 context.read<LoginViewModel>().login(
                   id,
                   nameController.text,
                   emailController.text,
                   passwordController.text,
                 );
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
               },
               child: Text('Entrar'),
             ),
-            if (viewModel.error != null)
-              Text(viewModel.error!, style: TextStyle(color: Colors.red)),
-            if (viewModel.user != null)
-              Text('Bem-vindo, ${viewModel.user!.name}'),
           ],
         ),
       ),
