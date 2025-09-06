@@ -1,8 +1,8 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'mysql.railway.internal', // ou maglev.proxy.rlwy.net se estiver usando proxy
-  port: 3306,
+  host: 'maglev.proxy.rlwy.net',
+  port: 32168,
   user: 'root',
   password: 'XEksQYLHDQPaRckAhQLhwNjcbVUfGrSO',
   database: 'railway'
@@ -10,10 +10,10 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
-    console.error('Erro ao conectar no banco:', err);
+    console.error('❌ Erro ao conectar no banco:', err);
     return;
   }
-  console.log('Conectado ao MySQL no Railway!');
+  console.log('✅ Conectado ao MySQL via Railway Proxy!');
 });
 
 module.exports = connection;
