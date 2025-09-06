@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/viewModels/UsuarioViewModel.dart';
 import 'package:provider/provider.dart';
 
+String Retorno retorno;
 
 class HomeScreen extends StatefulWidget {
   @override

@@ -1,10 +1,11 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'localhost', 
+  host: 'containers.railway.app',
+  port: 3306,
   user: 'root',
-  password: '#1A2b3c4d5E!',
-  database: 'flutter_app'
+  password: 'railway',
+  database: 'railway'
 });
 
 connection.connect((err) => {
@@ -12,7 +13,7 @@ connection.connect((err) => {
     console.error('Erro ao conectar no banco:', err);
     return;
   }
-  console.log('Conectado ao MySQL!');
+  console.log('Conectado ao banco MySQL no Railway!');
 });
 
 module.exports = connection;
