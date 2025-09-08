@@ -3,7 +3,7 @@ const UserModel = require('../models/userModel');
 function cadastrarUsuario(req, res) {
   const { id, name, email, password } = req.body;
 
-  if (!id || !name || !email || !password) {
+  if (!name || !email || !password) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
   }
 

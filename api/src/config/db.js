@@ -10,10 +10,10 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
-    console.error('❌ Erro ao conectar no banco:', err);
+    console.error('Erro ao conectar no banco:', err);
     return;
   }
-  console.log('✅ Conectado ao MySQL via Railway Proxy!');
+  console.log('Conectado ao MySQL via Railway Proxy!');
 });
 
 module.exports = connection;
