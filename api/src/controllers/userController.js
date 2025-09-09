@@ -9,11 +9,7 @@ function cadastrarUsuario(req, res) {
 
   UserModel.userExist(name, email, password, (err, result) => {
     if (err) {
-      return res.status(500).json({ error: 'Erro ao verificar usuário existente' });
-    }
-
-    if (result.length > 0) {
-      return res.status(409).json({ error: 'Usuário já existe' });
+      return res.status(500).json({ error: 'Usuário já existe' });
     }
 
     UserModel.createUser(id, name, email, password, (err, result) => {
