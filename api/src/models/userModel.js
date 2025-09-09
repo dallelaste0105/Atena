@@ -5,9 +5,9 @@ function createUser(id, name, email, password, callback) {
   db.query(query, [id, name, email, password], callback);
 }
 
-function doLogin(name, email, password, callback) {
-  const query = 'SELECT * FROM users WHERE name = ? AND email = ? AND password = ?';
+function userExist(name, email, password, callback) {
+  const query = 'SELECT * FROM users WHERE name = ? OR email = ? OR password = ?';
   db.query(query, [name, email, password], callback);
 }
 
-module.exports = { createUser, doLogin };
+module.exports = { createUser, userExist };
