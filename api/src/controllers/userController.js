@@ -2,24 +2,28 @@ const UserModel = require('../models/userModel');
 
 function cadastrarUsuario(req, res) {
   const { id, name, email, password } = req.body;
-  let stop = false;
 
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
   }
 
-  UserModel.userExist(id,name,email,password)
+  UserModel.userExist(name, email, password, (err, result) => {
     if (err) {
-      stop = true;
-      console.log('Usuário realmente não existe, legal hein')
+      return res.status(500).json({ error: 'Erro ao verificar usuário existente' });
     }
-  }
 
-  UserModel.createUser(id, name, email, password, (err, result) => {
-    if (err) {
-      return res.status(500).json({ error: 'Erro ao salvar no banco' });
+    if (result.length > 0) {
+      return res.status(409).json({ error: 'Usuário já existe' });
     }
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
+
+    UserModel.createUser(id, name, email, password, (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro ao salvar no banco' });
+      }
+
+      res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
+    });
   });
+}
 
 module.exports = { cadastrarUsuario };
