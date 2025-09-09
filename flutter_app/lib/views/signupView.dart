@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/viewModels/userViewModel.dart';
 import 'package:flutter_app/views/homeView.dart';
-import 'package:flutter_app/views/signupView.dart';
+import 'package:flutter_app/views/loginView.dart';
 
 int id = 0;
 final TextEditingController name = TextEditingController();
 final TextEditingController email = TextEditingController();
 final TextEditingController password = TextEditingController();
 
-class loginView extends StatefulWidget {
+class signupView extends StatefulWidget {
   @override
-  _loginViewState createState() => _loginViewState();
+  _signupViewState createState() => _signupViewState();
 }
 
-class _loginViewState extends State<loginView> {
+class _signupViewState extends State<signupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('Sign Up')),
       body: Center(child: Column(
         children: [
           TextField(controller: name),
@@ -26,10 +26,10 @@ class _loginViewState extends State<loginView> {
           ElevatedButton(onPressed: (){login(id, name.text, email.text, password.text);
             Navigator.push(context,
               MaterialPageRoute(builder: (context) => homeView()));},
-                child: Text('Login'))
+                child: Text('Sign Up'))
         ]
       )
       ),
-floatingActionButton: FloatingActionButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => signupView()));}, child: Text("Sign Up")),
+floatingActionButton: FloatingActionButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => loginView()));}, child: Text("Login")),
     );
   }}
