@@ -8,9 +8,10 @@ function cadastrarUsuario(req, res) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
   }
 
-  UserModel.userExist(name,email,password)
+  UserModel.userExist(id,name,email,password)
     if (err) {
-      return res.status(500).json({ error: 'Usuário realmente não existe, legal hein' });
+      stop = true;
+      console.log('Usuário realmente não existe, legal hein')
     }
   }
 
