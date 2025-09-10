@@ -1,6 +1,6 @@
 const UserModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const segredo = minhaChave;
+const segredo = "minhaChave";
 
 function cadastrarUsuario(req, res) {
   const {name, email, password } = req.body;
