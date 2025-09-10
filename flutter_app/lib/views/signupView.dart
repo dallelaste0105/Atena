@@ -23,7 +23,7 @@ class _signupViewState extends State<signupView> {
           TextField(controller: name),
           TextField(controller: email),
           TextField(controller: password),
-          ElevatedButton(onPressed: (){login(id, name.text, email.text, password.text);
+          ElevatedButton(onPressed: (){signup(id, name.text, email.text, password.text);
             Navigator.push(context,
               MaterialPageRoute(builder: (context) => homeView()));},
                 child: Text('Sign Up'))

@@ -23,10 +23,7 @@ class _loginViewState extends State<loginView> {
           TextField(controller: name),
           TextField(controller: email),
           TextField(controller: password),
-          ElevatedButton(onPressed: (){login(id, name.text, email.text, password.text);
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => homeView()));},
-                child: Text('Login'))
+          ElevatedButton(onPressed: (){}, child: Text("Login"))
         ]
       )
       ),

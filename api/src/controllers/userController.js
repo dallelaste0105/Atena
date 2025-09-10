@@ -1,7 +1,9 @@
 const UserModel = require('../models/userModel');
+const jwt = require('jsonwebtoken');
+const segredo = minhaChave;
 
 function cadastrarUsuario(req, res) {
-  const { id, name, email, password } = req.body;
+  const {name, email, password } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
@@ -20,10 +22,20 @@ function cadastrarUsuario(req, res) {
       if (err) {
         return res.status(500).json({ error: 'Erro ao salvar no banco' });
       }
-
-      res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
+      
     });
   });
 }
 
-module.exports = { cadastrarUsuario };
+function pegarUsuario(req, res){
+  const {name, email, password} = req.body;
+  if(UserModel.getUser(nome, email, senha)){
+    const token = jwt.sign({name:name,email:email,password:password}, segredo, {expiresIn:'48h'})
+  }
+
+  if (err) {
+        return res.status(500).json({ error: 'Usuario não existe' });
+      }
+}
+
+module.exports = { cadastrarUsuario, pegarUsuario };
