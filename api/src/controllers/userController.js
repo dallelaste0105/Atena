@@ -31,6 +31,7 @@ function pegarUsuario(req, res){
   const {name, email, password} = req.body;
   if(UserModel.getUser(nome, email, senha)){
     const token = jwt.sign({name:name,email:email,password:password}, segredo, {expiresIn:'48h'})
+    res.status(201).json({message:token})
   }
 
   if (err) {
