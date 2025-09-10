@@ -27,16 +27,30 @@ function cadastrarUsuario(req, res) {
   });
 }
 
-function pegarUsuario(req, res){
-  const {name, email, password} = req.body;
-  if(UserModel.getUser(nome, email, senha)){
-    const token = jwt.sign({name:name,email:email,password:password}, segredo, {expiresIn:'48h'})
-    res.status(201).json({message:token})
-  }
+function pegarUsuario(req, res) {
+  const { email, password } = req.body;
 
-  if (err) {
-        return res.status(500).json({ error: 'Usuario não existe' });
-      }
+  // 1. Buscar usuário no banco
+  UserModel.getUser(email, (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(401).json({ error: 'Usuário não encontrado' });
+    }
+
+    const user = result[0];
+
+    // 2. Comparar senha
+    const senhaCorreta = bcrypt.compareSync(password, user.password);
+    if (!senhaCorreta) {
+      return res.status(401).json({ error: 'Senha incorreta' });
+    }
+
+    // 3. Gerar token 
+    const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, segredo, { expiresIn: '48h' });
+
+    // 4. Retornar token
+    res.status(200).json({ token });
+  });
 }
+
 
 module.exports = { cadastrarUsuario, pegarUsuario };
